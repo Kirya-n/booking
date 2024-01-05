@@ -1,9 +1,9 @@
 from rest_framework import serializers, validators
 
-from api.models import ApiUser, Hotel
+from api.models import ApiUser, Hotel, Room, Booking
 
 
-class UserSerialiser(serializers.Serializer):
+class UserSerializer(serializers.Serializer):
     username = serializers.CharField(
         max_length=128,
         validators=[
@@ -42,5 +42,18 @@ class UserSerialiser(serializers.Serializer):
 class HotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hotel
+        fields = '__all__'
+        extra_kwargs = {'id': {'read_only': True}}
+
+
+class RoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Room
+        fields = '__all__'
+        extra_kwargs = {'id': {'read_only': True}}
+
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Booking
         fields = '__all__'
         extra_kwargs = {'id': {'read_only': True}}

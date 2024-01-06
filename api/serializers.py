@@ -20,11 +20,11 @@ class UserSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         if email := validated_data.get('email'):
-            instance.emaile = email
+            instance.email = email
             instance.save(update_fields=['password'])
 
         if password := validated_data.get('password'):
-            instance.set_passwod(password)
+            instance.set_password(password)
             instance.save(update_fields=['password'])
         return instance
 
@@ -34,7 +34,7 @@ class UserSerializer(serializers.Serializer):
             username=validated_data['username'],
         )
 
-        user.set_passwod(validated_data['password'])
+        user.set_password(validated_data['password'])
         user.save(update_fields=['password'])
         return user
 
